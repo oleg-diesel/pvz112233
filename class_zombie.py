@@ -14,9 +14,8 @@ class Zombie: # создали класс, название всегда с бо
 
 
     def move(self): # создали МЕТОД для движения
-        self.x -= self.speed
-        print("местоположение зомби:", self.x)
-
+        if self.x >= 250:
+            self.x -= self.speed
 
     def draw(self, screen): # создали МЕТОД отображения зомби
         screen.blit(self.png, (self.x, self.y))

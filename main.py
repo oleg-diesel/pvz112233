@@ -14,15 +14,14 @@ last_update_time = pygame.time.get_ticks()
 
 zombie_line = [500, 400, 300, 200, 100]
 zombie_list = []
-for temp in range(100):
-    newzombie = Zombie(300, 1,801, random.choice(zombie_line), 5, png=("pictures/zombie1.png"))
+for temp in range(6):
+    newzombie = Zombie(300, 1,1500, random.choice(zombie_line), 0.017, png=("pictures/zombie1.png"))
     zombie_list.append(newzombie)
 
 batx = 0
 baty = 0
 sunx = 801
 suny = 0
-
 
 bat = pygame.image.load("pictures/bat-a.png") # загружаем картинку обязательно до цикла
 bat = pygame.transform.scale(bat, (75, 75))
@@ -64,6 +63,8 @@ button_exit = pygame.Rect(50, 350, 150, 50)
 
 button_test = pygame.Rect(150, 50, 150, 50)
 
+green_square = pygame.Rect(0, 100, 100, 100)
+
 logic = False
 
 active_time_plus_05_sec = pygame.time.get_ticks() + 250 #считаем время следующей анимации
@@ -88,7 +89,6 @@ while logic == False:  # создали бесконечный цикл
     screen.fill((0, 0, 0))  # заполнить экран черным цветом
 
     if screens == 1:
-
 
         pygame.draw.rect(screen, (125, 125, 125), button_start) # размещаем кнопку
 
@@ -126,6 +126,9 @@ while logic == False:  # создали бесконечный цикл
         screen.blit(text_exit, (button_exit.x + 34, button_exit.y + 10))
 
     if screens == 2:
+
+        pygame.draw.rect(screen, (0, 255, 0), green_square)
+
         # Работа со временем (считаем паузу)
         active_time = pygame.time.get_ticks()  # текущее время с начала работы приложения
         if active_time >= active_time_plus_05_sec:
@@ -134,6 +137,7 @@ while logic == False:  # создали бесконечный цикл
                 one_or_two_or_three = 0
             one_or_two_or_three += 1
             batx += 20
+
 
         if one_or_two_or_three == 1:
             screen.blit(bat, (batx, baty))
@@ -150,6 +154,7 @@ while logic == False:  # создали бесконечный цикл
             suny = random.randint(50, 500)
         screen.blit(little_sun, (sunx, suny))
         for temp in zombie_list:
+            temp.move()
             temp.draw(screen)
 
 

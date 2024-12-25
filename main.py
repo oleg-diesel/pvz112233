@@ -1,6 +1,7 @@
 import pygame  # импортируем всю БИБЛИОТЕКУ pygame
 import random
 from class_zombie import Zombie # импортировали класс зомби из скрипта
+from class_squares import Squares
 pygame.init()  # инициализация всех модулей Pygame
 
 width, height = 800, 600  # высота и ширина
@@ -17,6 +18,8 @@ zombie_list = []
 for temp in range(6):
     newzombie = Zombie(300, 1,1500, random.choice(zombie_line), 0.017, png=("pictures/zombie1.png"))
     zombie_list.append(newzombie)
+
+setka_kol_vo_ravno_1 = Squares(5, 7, 100)
 
 batx = 0
 baty = 0
@@ -62,8 +65,6 @@ button_authors = pygame.Rect(50, 250, 150, 50)
 button_exit = pygame.Rect(50, 350, 150, 50)
 
 button_test = pygame.Rect(150, 50, 150, 50)
-
-green_square = pygame.Rect(0, 100, 100, 100)
 
 logic = False
 
@@ -127,7 +128,6 @@ while logic == False:  # создали бесконечный цикл
 
     if screens == 2:
 
-        pygame.draw.rect(screen, (0, 255, 0), green_square)
 
         # Работа со временем (считаем паузу)
         active_time = pygame.time.get_ticks()  # текущее время с начала работы приложения
@@ -156,6 +156,6 @@ while logic == False:  # создали бесконечный цикл
         for temp in zombie_list:
             temp.move()
             temp.draw(screen)
-
+        setka_kol_vo_ravno_1.draw_square(screen)
 
     pygame.display.update()  # обновить экран (fps)

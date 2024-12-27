@@ -2,6 +2,7 @@ import pygame  # импортируем всю БИБЛИОТЕКУ pygame
 import random
 from class_zombie import Zombie # импортировали класс зомби из скрипта
 from class_squares import Squares
+from class_plants import Plants
 pygame.init()  # инициализация всех модулей Pygame
 
 width, height = 800, 600  # высота и ширина
@@ -20,6 +21,8 @@ for temp in range(6):
     zombie_list.append(newzombie)
 
 setka_kol_vo_ravno_1 = Squares(5, 7, 100)
+
+regular_plant = Plants(6, 1, "pictures/горохострел-removebg-preview.png", "peashoter", 100, False, 0, 0)
 
 batx = 0
 baty = 0
@@ -157,5 +160,7 @@ while logic == False:  # создали бесконечный цикл
             temp.move()
             temp.draw(screen)
         setka_kol_vo_ravno_1.draw_square(screen)
+        regular_plant.draw(screen)
+
 
     pygame.display.update()  # обновить экран (fps)

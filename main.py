@@ -134,25 +134,8 @@ while logic == False:  # создали бесконечный цикл
 
         # Работа со временем (считаем паузу)
         active_time = pygame.time.get_ticks()  # текущее время с начала работы приложения
-        if active_time >= active_time_plus_05_sec:
-            active_time_plus_05_sec += animation_speed
-            if one_or_two_or_three >= 2:
-                one_or_two_or_three = 0
-            one_or_two_or_three += 1
-            batx += 20
-
-
-        if one_or_two_or_three == 1:
-            screen.blit(bat, (batx, baty))
-        elif one_or_two_or_three == 2:
-            screen.blit(bat1, (batx, baty))
-        if batx >= 801:
-            batx -= 901
-            baty += 75
-        if baty >= 601:
-            baty = 0
-        if active_time >= sun_fall_time: # если после нажатия кнопки играть прошло 10 секунд/появление солнца раз в 10 секунд
-            sun_fall_time += 10000 # считаем, во сколько будет следующее появление солнца
+        if active_time >= sun_fall_time: # если после нажатия кнопки играть прошло 20 секунд/появление солнца раз в 20 секунд
+            sun_fall_time += 20000 # считаем, во сколько будет следующее появление солнца
             sunx = random.randint(50, 750)
             suny = random.randint(50, 500)
         screen.blit(little_sun, (sunx, suny))

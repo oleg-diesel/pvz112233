@@ -22,7 +22,7 @@ for temp in range(6):
 
 setka_kol_vo_ravno_1 = Squares(5, 7, 100)
 
-regular_plant = Plants(6, 1, "pictures/горохострел-removebg-preview.png", "peashoter", 100, False, 0, 0)
+regular_plant = Plants(6, 1, "pictures/Peashooter_0.png", "peashoter", 100, False, 0, 0)
 
 batx = 0
 baty = 0

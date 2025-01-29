@@ -12,4 +12,4 @@ class Plants:
 
 
     def draw(self, screen):
-        screen.blit(self.picture, (0, 0))
+        screen.blit(self.picture, (100, 100))

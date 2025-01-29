@@ -16,27 +16,22 @@ last_update_time = pygame.time.get_ticks()
 
 zombie_line = [500, 400, 300, 200, 100]
 zombie_list = []
-for temp in range(6):
+for temp in range(1):
     newzombie = Zombie(300, 1,1500, random.choice(zombie_line), 0.017, png=("pictures/zombie1.png"))
     zombie_list.append(newzombie)
 
 setka_kol_vo_ravno_1 = Squares(5, 7, 100)
 
-regular_plant = Plants(6, 1, "pictures/Peashooter_0.png", "peashoter", 100, False, 0, 0)
+regular_plant = Plants(6, 1, "pictures/Peashooter_0.png", "peashoter", 100, False, 100, 100)
 
 batx = 0
 baty = 0
 sunx = 801
 suny = 0
 
-bat = pygame.image.load("pictures/bat-a.png") # загружаем картинку обязательно до цикла
-bat = pygame.transform.scale(bat, (75, 75))
-bat1 = pygame.image.load("pictures/bat-b.png")
-bat1 = pygame.transform.scale(bat1, (45, 75))
-bat2 = pygame.image.load("pictures/bat-c.png")
-bat2 = pygame.transform.scale(bat2, (75, 75))
+
 little_sun = pygame.image.load("pictures/aaaa.png").convert_alpha()
-little_sun = pygame.transform.scale(little_sun, (40, 40))
+little_sun = pygame.transform.scale(little_sun, (100, 100))
 
 
 start = ""
@@ -131,18 +126,17 @@ while logic == False:  # создали бесконечный цикл
 
     if screens == 2:
 
-
+        setka_kol_vo_ravno_1.draw_square(screen)
         # Работа со временем (считаем паузу)
         active_time = pygame.time.get_ticks()  # текущее время с начала работы приложения
         if active_time >= sun_fall_time: # если после нажатия кнопки играть прошло 20 секунд/появление солнца раз в 20 секунд
             sun_fall_time += 20000 # считаем, во сколько будет следующее появление солнца
-            sunx = random.randint(50, 750)
+            sunx = random.randint(50, 700)
             suny = random.randint(50, 500)
         screen.blit(little_sun, (sunx, suny))
         for temp in zombie_list:
             temp.move()
             temp.draw(screen)
-        setka_kol_vo_ravno_1.draw_square(screen)
         regular_plant.draw(screen)
 
 

@@ -68,6 +68,7 @@ button_exit = pygame.Rect(50, 350, 150, 50)
 button_test = pygame.Rect(150, 50, 150, 50)
 
 logic = False
+active = False
 
 active_time_plus_05_sec = pygame.time.get_ticks() + 250 #считаем время следующей анимации
 
@@ -89,9 +90,14 @@ while logic == False:  # создали бесконечный цикл
                 if xtap >= 50 and xtap <= 200 and ytap >= 50 and ytap <= 100:
                     screens = 2
                 sun_fall_time = pygame.time.get_ticks() + 10000 # посчитали во сколько появится солнце
-        elif screens == 2:
-            if xtap >= 125 and xtap <= 190 and ytap >= 7 and ytap <=72:
-                print("вы нажали на карточку горохострела!")
+            elif screens == 2:
+                if xtap >= 125 and xtap <= 190 and ytap >= 7 and ytap <=72 and active != True:
+                    print("вы нажали на карточку горохострела!")
+                    active = True
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"
+                active = False
+                print("вы отменили выбор карточки!")
     screen.fill((0, 0, 0))  # заполнить экран черным цветом
 
     if screens == 1:

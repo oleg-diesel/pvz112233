@@ -32,7 +32,10 @@ suny = 0
 
 little_sun = pygame.image.load("pictures/aaaa.png").convert_alpha()
 little_sun = pygame.transform.scale(little_sun, (100, 100))
-
+chose_tab = pygame.image.load("pictures/ChooserBackground.png")
+chose_tab = pygame.transform.scale(chose_tab, (800, 100))
+peashoter_card = pygame.image.load("pictures/card_peashooter.png")
+sunflower_card = pygame.image.load("pictures/card_sunflower.png")
 
 start = ""
 settings = ""
@@ -78,13 +81,17 @@ while logic == False:  # создали бесконечный цикл
     for event in pygame.event.get():  # обработка всех событий
         if event.type == pygame.QUIT:  # если событие - выход
             logic = True
-        elif event.type == pygame.MOUSEBUTTONUP:
+        elif event.type == pygame.MOUSEBUTTONDOWN:
             coordinaty_nazhatiya = event.pos
             xtap = coordinaty_nazhatiya[0]
             ytap = coordinaty_nazhatiya[1]
-            if xtap >= 50 and xtap <= 200 and ytap >= 50 and ytap <= 100:
-                screens = 2
+            if screens == 1:
+                if xtap >= 50 and xtap <= 200 and ytap >= 50 and ytap <= 100:
+                    screens = 2
                 sun_fall_time = pygame.time.get_ticks() + 10000 # посчитали во сколько появится солнце
+        elif screens == 2:
+            if xtap >= 125 and xtap <= 190 and ytap >= 7 and ytap <=72:
+                print("вы нажали на карточку горохострела!")
     screen.fill((0, 0, 0))  # заполнить экран черным цветом
 
     if screens == 1:
@@ -138,6 +145,9 @@ while logic == False:  # создали бесконечный цикл
             temp.move()
             temp.draw(screen)
         regular_plant.draw(screen)
+        screen.blit(chose_tab, (0, 0))
+        screen.blit(peashoter_card, (125, 7))
+        screen.blit(sunflower_card, (215, 7))
 
 
     pygame.display.update()  # обновить экран (fps)

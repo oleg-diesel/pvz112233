@@ -82,22 +82,30 @@ while logic == False:  # создали бесконечный цикл
     for event in pygame.event.get():  # обработка всех событий
         if event.type == pygame.QUIT:  # если событие - выход
             logic = True
+
+        #проверяем нажатие мыши
         elif event.type == pygame.MOUSEBUTTONDOWN:
             coordinaty_nazhatiya = event.pos
             xtap = coordinaty_nazhatiya[0]
             ytap = coordinaty_nazhatiya[1]
             if screens == 1:
-                if xtap >= 50 and xtap <= 200 and ytap >= 50 and ytap <= 100:
+                if button_start.collidepoint(coordinaty_nazhatiya): # сделали проверку нажатия с помощью метода collidepoint
                     screens = 2
                 sun_fall_time = pygame.time.get_ticks() + 10000 # посчитали во сколько появится солнце
             elif screens == 2:
-                if xtap >= 125 and xtap <= 190 and ytap >= 7 and ytap <=72 and active != True:
+                if xtap >= 125 and xtap <= 190 and ytap >= 6 and ytap <=71 and active != True:
                     print("вы нажали на карточку горохострела!")
+                elif xtap >=190 and xtap <=254 and ytap >= 6 and ytap <=71 and active != True:
+                    print("вы нажали на карточку подсонуха!")
                     active = True
+
+        # если событие = нажатие клавиши
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"
                 active = False
                 print("вы отменили выбор карточки!")
+
+
     screen.fill((0, 0, 0))  # заполнить экран черным цветом
 
     if screens == 1:
@@ -152,8 +160,8 @@ while logic == False:  # создали бесконечный цикл
             temp.draw(screen)
         regular_plant.draw(screen)
         screen.blit(chose_tab, (0, 0))
-        screen.blit(peashoter_card, (125, 7))
-        screen.blit(sunflower_card, (215, 7))
+        screen.blit(peashoter_card, (125, 6))
+        screen.blit(sunflower_card, (190, 6))
 
 
     pygame.display.update()  # обновить экран (fps)

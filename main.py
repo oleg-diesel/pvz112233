@@ -20,7 +20,7 @@ for temp in range(1):
     newzombie = Zombie(300, 1,1500, random.choice(zombie_line), 0.017, png=("pictures/zombie1.png"))
     zombie_list.append(newzombie)
 
-setka_kol_vo_ravno_1 = Squares(5, 7, 100)
+setka_kol_vo_ravno_1 = Squares(5, 7, 100, False)
 
 regular_plant = Plants(6, 1, "pictures/Peashooter_0.png", "peashoter", 100, False, 100, 100)
 
@@ -69,8 +69,9 @@ button_test = pygame.Rect(150, 50, 150, 50)
 
 logic = False
 active = False
+card_type = 0 # 2 параметр, для удобного выбора карт без лишнего спама в консоли
 
-active_time_plus_05_sec = pygame.time.get_ticks() + 250 #считаем время следующей анимации
+active_time_plus_05_sec = pygame.time.get_ticks() + 250 # считаем время следующей анимации
 
 
 language_choise = "English"
@@ -86,6 +87,8 @@ while logic == False:  # создали бесконечный цикл
         #проверяем нажатие мыши
         elif event.type == pygame.MOUSEBUTTONDOWN:
             coordinaty_nazhatiya = event.pos
+            #print(coordinaty_nazhatiya)
+            #print(type(coordinaty_nazhatiya))
             xtap = coordinaty_nazhatiya[0]
             ytap = coordinaty_nazhatiya[1]
             if screens == 1:
@@ -95,12 +98,22 @@ while logic == False:  # создали бесконечный цикл
             elif screens == 2:
                 if xtap >= 125 and xtap <= 190 and ytap >= 6 and ytap <=71 and active != True:
                     print("вы нажали на карточку горохострела!")
+                    card_type = 1
+                    active = True
                 elif xtap >=190 and xtap <=254 and ytap >= 6 and ytap <=71 and active != True:
                     print("вы нажали на карточку подсонуха!")
+                    card_type = 2
                     active = True
+                elif card_type == 1 or card_type == 2: # 4 проверяет, выбрана ли карточка
+                    for actual_cell in setka_kol_vo_ravno_1.cells_list: # 5 цикл for
+                        if actual_cell.collidepoint(coordinaty_nazhatiya): # 6 сделали проверку нажатия с помощью метода collidepoint
+                            print("вы попали по клетке")
+                            print(actual_cell)
+                        else:
+                            print("вы не попали по клетке")
 
         # если событие = нажатие клавиши
-        elif event.type == pygame.KEYDOWN:
+        elif event.type == pygame.KEYDOWN and active == True:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"
                 active = False
                 print("вы отменили выбор карточки!")
@@ -158,7 +171,6 @@ while logic == False:  # создали бесконечный цикл
         for temp in zombie_list:
             temp.move()
             temp.draw(screen)
-        regular_plant.draw(screen)
         screen.blit(chose_tab, (0, 0))
         screen.blit(peashoter_card, (125, 6))
         screen.blit(sunflower_card, (190, 6))

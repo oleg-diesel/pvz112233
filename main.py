@@ -10,6 +10,7 @@ screen = pygame.display.set_mode((width, height))  # создали окно 800
 
 
 cell_active_list = []
+check = 0
 
 
 current_frame = 1 # переменная для отслееживания кадра (1 из 3 включительно)
@@ -113,14 +114,16 @@ while logic == False:  # создали бесконечный цикл
                     card_type = 2
                     active = True
                 elif card_type == 1 or card_type == 2: # 4 проверяет, выбрана ли карточка
+                    check +=1
                     for actual_cell in setka_kol_vo_ravno_1.cells_list: # 5 цикл for
                         if actual_cell.collidepoint(coordinaty_nazhatiya): # 6 сделали проверку нажатия с помощью метода collidepoint
                             print("вы попали по клетке")
-                            cell_active_list.append(actual_cell)
-                            print(set(cell_active_list))
+                            if actual_cell not in cell_active_list:
+                                cell_active_list.append(actual_cell)
+                            print(cell_active_list)
                         else:
                             print("вы не попали по клетке")
-
+                    print(check)
         # если событие = нажатие клавиши
         elif event.type == pygame.KEYDOWN and active == True:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"

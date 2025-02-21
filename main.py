@@ -8,6 +8,10 @@ pygame.init()  # инициализация всех модулей Pygame
 width, height = 800, 600  # высота и ширина
 screen = pygame.display.set_mode((width, height))  # создали окно 800x600
 
+
+cell_active_list = []
+
+
 current_frame = 1 # переменная для отслееживания кадра (1 из 3 включительно)
 animation_speed = 250 # скорость анимации в милисекундах
 sun_fall_time = 0
@@ -36,7 +40,10 @@ chose_tab = pygame.image.load("pictures/ChooserBackground.png")
 chose_tab = pygame.transform.scale(chose_tab, (800, 100))
 peashoter_card = pygame.image.load("pictures/card_peashooter.png")
 sunflower_card = pygame.image.load("pictures/card_sunflower.png")
-
+peashoter_plant = pygame.image.load("pictures/Peashooter_0.png")
+peashoter_plant = pygame.transform.scale(peashoter_plant, (100, 100))
+sunflower_plant = pygame.image.load("pictures/SunFlower_0.png")
+sunflower_plant = pygame.transform.scale(sunflower_plant, (100, 100))
 start = ""
 settings = ""
 authors = ""
@@ -45,6 +52,7 @@ Exit = ""
 screens = 1
 
 one_or_two_or_three = 1
+one_or_two_card = 0
 
 
 pygame.font.init()  # инициализация модуля для работы со шрифтом
@@ -108,7 +116,8 @@ while logic == False:  # создали бесконечный цикл
                     for actual_cell in setka_kol_vo_ravno_1.cells_list: # 5 цикл for
                         if actual_cell.collidepoint(coordinaty_nazhatiya): # 6 сделали проверку нажатия с помощью метода collidepoint
                             print("вы попали по клетке")
-                            print(actual_cell)
+                            cell_active_list.append(actual_cell)
+                            print(set(cell_active_list))
                         else:
                             print("вы не попали по клетке")
 

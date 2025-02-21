@@ -8,6 +8,7 @@ class Squares:
         self.cell_size = cell_size
         self.cells_list = [] # 1 пустой список для клеток
         self.cell_status = cell_status # 3 параметр "занятости" клетки
+        self.cell_active_list = []
 
 
 

@@ -45,6 +45,8 @@ peashoter_plant = pygame.image.load("pictures/Peashooter_0.png")
 peashoter_plant = pygame.transform.scale(peashoter_plant, (100, 100))
 sunflower_plant = pygame.image.load("pictures/SunFlower_0.png")
 sunflower_plant = pygame.transform.scale(sunflower_plant, (100, 100))
+you_lose = pygame.image.load("pictures/img.png")
+you_lose = pygame.transform.scale(you_lose, (800, 600))
 start = ""
 settings = ""
 authors = ""
@@ -116,14 +118,9 @@ while logic == False:  # создали бесконечный цикл
                 elif card_type == 1 or card_type == 2: # 4 проверяет, выбрана ли карточка
                     check +=1
                     for actual_cell in setka_kol_vo_ravno_1.cells_list: # 5 цикл for
-                        if actual_cell.collidepoint(coordinaty_nazhatiya): # 6 сделали проверку нажатия с помощью метода collidepoint
-                            print("вы попали по клетке")
+                        if actual_cell.collidepoint(coordinaty_nazhatiya): # 6 сделали проверку нажатия с помощью метода collidepoin
                             if actual_cell not in cell_active_list:
                                 cell_active_list.append(actual_cell)
-                            print(cell_active_list)
-                        else:
-                            print("вы не попали по клетке")
-                    print(check)
         # если событие = нажатие клавиши
         elif event.type == pygame.KEYDOWN and active == True:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"
@@ -180,12 +177,14 @@ while logic == False:  # создали бесконечный цикл
             sunx = random.randint(50, 700)
             suny = random.randint(50, 500)
         screen.blit(little_sun, (sunx, suny))
-        for temp in zombie_list:
-            temp.move()
-            temp.draw(screen)
         screen.blit(chose_tab, (0, 0))
         screen.blit(peashoter_card, (125, 6))
         screen.blit(sunflower_card, (190, 6))
+        for temp in zombie_list:
+            temp.move()
+            temp.draw(screen)
+            if newzombie.x <= 50:
+                screen.blit(you_lose, (0, 0))
 
 
     pygame.display.update()  # обновить экран (fps)

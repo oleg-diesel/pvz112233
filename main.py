@@ -21,13 +21,12 @@ last_update_time = pygame.time.get_ticks()
 
 zombie_line = [500, 400, 300, 200, 100]
 zombie_list = []
-for temp in range(1):
-    newzombie = Zombie(300, 1,1500, random.choice(zombie_line), 0.017, png=("pictures/zombie1.png"))
+for temp in range(5):
+    newzombie = Zombie(10, 1,random.randint(1500, 15000), random.choice(zombie_line), 0.017, png=("pictures/zombie1.png"))
     zombie_list.append(newzombie)
 
-setka_kol_vo_ravno_1 = Squares(5, 7, 100, False)
 
-regular_plant = Plants(6, 1, "pictures/Peashooter_0.png", "peashoter", 100, False, 100, 100)
+setka_kol_vo_ravno_1 = Squares(5, 7, 100, False)
 
 batx = 0
 baty = 0
@@ -64,7 +63,6 @@ my_font = pygame.font.SysFont('Comic Sans MS', 25)  # создаем шрифт 
 white = (255, 255, 255)
 
 # раздел для создания текста
-
 
 # раздел для создания кнопок
 
@@ -120,7 +118,15 @@ while logic == False:  # создали бесконечный цикл
                     for actual_cell in setka_kol_vo_ravno_1.cells_list: # 5 цикл for
                         if actual_cell.collidepoint(coordinaty_nazhatiya): # 6 сделали проверку нажатия с помощью метода collidepoin
                             if actual_cell not in cell_active_list:
-                                cell_active_list.append(actual_cell)
+                                if card_type == 1:
+                                    just_a_plant = Plants(5, 1, "pictures/Peashooter_0.png", "peashoter", 100, False, actual_cell.x, actual_cell.y)
+                                elif card_type == 2:
+                                    just_a_plant = Plants(3, 0, "pictures/SunFlower_0.png", "sunflower", 50, True, actual_cell.x, actual_cell.y)
+                                cell_active_list.append((actual_cell, just_a_plant))
+                                active = False
+                                card_type = 0
+                            else:
+                                continue
         # если событие = нажатие клавиши
         elif event.type == pygame.KEYDOWN and active == True:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"
@@ -134,9 +140,12 @@ while logic == False:  # создали бесконечный цикл
 
         pygame.draw.rect(screen, (125, 125, 125), button_start) # размещаем кнопку
 
+
         pygame.draw.rect(screen, (125, 125, 125), button_settings)
 
+
         pygame.draw.rect(screen, (125, 125, 125), button_authors)
+
 
         pygame.draw.rect(screen, (125, 125, 125), button_exit)
 
@@ -180,11 +189,12 @@ while logic == False:  # создали бесконечный цикл
         screen.blit(chose_tab, (0, 0))
         screen.blit(peashoter_card, (125, 6))
         screen.blit(sunflower_card, (190, 6))
+        for cell, plant in cell_active_list:
+            plant.draw(screen)
         for temp in zombie_list:
             temp.move()
             temp.draw(screen)
             if newzombie.x <= 50:
                 screen.blit(you_lose, (0, 0))
 
-
-    pygame.display.update()  # обновить экран (fps)
+    pygame.display.update()# обновить экран (fps)

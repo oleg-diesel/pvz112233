@@ -9,7 +9,8 @@ class Plants:
         self.name = name
         self.price = price
         self.sun_generate = sun_generate
-
+        self.plant_x = plant_x
+        self.plant_y = plant_y
 
     def draw(self, screen):
-        screen.blit(self.picture, (100, 100))
+        screen.blit(self.picture, (self.plant_x, self.plant_y))

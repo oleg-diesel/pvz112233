@@ -85,9 +85,12 @@ active_time_plus_05_sec = pygame.time.get_ticks() + 250 # считаем вре�
 
 language_choise = "English"
 
+clock = pygame.time.Clock()
+
 # игровой цикл
 
 while logic == False:  # создали бесконечный цикл
+    clock.tick(60)
 
     for event in pygame.event.get():  # обработка всех событий
         if event.type == pygame.QUIT:  # если событие - выход

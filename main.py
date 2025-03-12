@@ -21,7 +21,7 @@ last_update_time = pygame.time.get_ticks()
 
 zombie_line = [500, 400, 300, 200, 100]
 zombie_list = []
-for temp in range(5):
+for temp in range(20):
     newzombie = Zombie(10, 1,random.randint(1500, 15000), random.choice(zombie_line), 0.017, png=("pictures/zombie1.png"))
     zombie_list.append(newzombie)
 

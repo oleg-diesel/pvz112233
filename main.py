@@ -38,12 +38,8 @@ little_sun = pygame.image.load("pictures/aaaa.png").convert_alpha()
 little_sun = pygame.transform.scale(little_sun, (100, 100))
 chose_tab = pygame.image.load("pictures/ChooserBackground.png")
 chose_tab = pygame.transform.scale(chose_tab, (800, 100))
-peashoter_card = pygame.image.load("pictures/card_peashooter.png")
+peashooter_card = pygame.image.load("pictures/card_peashooter.png")
 sunflower_card = pygame.image.load("pictures/card_sunflower.png")
-peashoter_plant = pygame.image.load("pictures/Peashooter_0.png")
-peashoter_plant = pygame.transform.scale(peashoter_plant, (100, 100))
-sunflower_plant = pygame.image.load("pictures/SunFlower_0.png")
-sunflower_plant = pygame.transform.scale(sunflower_plant, (100, 100))
 you_lose = pygame.image.load("pictures/img.png")
 you_lose = pygame.transform.scale(you_lose, (800, 600))
 start = ""
@@ -90,7 +86,7 @@ clock = pygame.time.Clock()
 # игровой цикл
 
 while logic == False:  # создали бесконечный цикл
-    clock.tick(60)
+    clock.tick(165) # ограничение фпс
 
     for event in pygame.event.get():  # обработка всех событий
         if event.type == pygame.QUIT:  # если событие - выход
@@ -122,9 +118,21 @@ while logic == False:  # создали бесконечный цикл
                         if actual_cell.collidepoint(coordinaty_nazhatiya): # 6 сделали проверку нажатия с помощью метода collidepoin
                             if actual_cell not in cell_active_list:
                                 if card_type == 1:
-                                    just_a_plant = Plants(5, 1, "pictures/Peashooter_0.png", "peashoter", 100, False, actual_cell.x, actual_cell.y)
+                                    just_a_plant = Plants(5,
+                                                          0,
+                                                          "peashooter",
+                                                          100,
+                                                          False,
+                                                          actual_cell.x,
+                                                          actual_cell.y)
                                 elif card_type == 2:
-                                    just_a_plant = Plants(3, 0, "pictures/SunFlower_0.png", "sunflower", 50, True, actual_cell.x, actual_cell.y)
+                                    just_a_plant = Plants(3,
+                                                          0,
+                                                          "sunflower",
+                                                          50,
+                                                          True,
+                                                          actual_cell.x,
+                                                          actual_cell.y)
                                 cell_active_list.append((actual_cell, just_a_plant))
                                 active = False
                                 card_type = 0
@@ -190,7 +198,7 @@ while logic == False:  # создали бесконечный цикл
             suny = random.randint(50, 500)
         screen.blit(little_sun, (sunx, suny))
         screen.blit(chose_tab, (0, 0))
-        screen.blit(peashoter_card, (125, 6))
+        screen.blit(peashooter_card, (125, 6))
         screen.blit(sunflower_card, (190, 6))
         for cell, plant in cell_active_list:
             plant.draw(screen)

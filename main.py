@@ -14,6 +14,7 @@ check = 0
 
 
 current_frame = 1 # переменная для отслееживания кадра (1 из 3 включительно)
+current_frame = 1 # переменная для отслееживания кадра (1 из 3 включительно)
 animation_speed = 250 # скорость анимации в милисекундах
 sun_fall_time = 0
 first_sun_appearance = 0
@@ -22,7 +23,7 @@ last_update_time = pygame.time.get_ticks()
 zombie_line = [500, 400, 300, 200, 100]
 zombie_list = []
 for temp in range(20):
-    newzombie = Zombie(10, 1,random.randint(1500, 15000), random.choice(zombie_line), 0.017, png=("pictures/zombie1.png"))
+    newzombie = Zombie(10, 1,random.randint(1500, 15000), random.choice(zombie_line), 0.017)
     zombie_list.append(newzombie)
 
 
@@ -113,31 +114,11 @@ while logic == False:  # создали бесконечный цикл
                     card_type = 2
                     active = True
                 elif card_type == 1 or card_type == 2: # 4 проверяет, выбрана ли карточка
-                    check +=1
-                    for actual_cell in setka_kol_vo_ravno_1.cells_list: # 5 цикл for
-                        if actual_cell.collidepoint(coordinaty_nazhatiya): # 6 сделали проверку нажатия с помощью метода collidepoin
-                            if actual_cell not in cell_active_list:
-                                if card_type == 1:
-                                    just_a_plant = Plants(5,
-                                                          0,
-                                                          "peashooter",
-                                                          100,
-                                                          False,
-                                                          actual_cell.x,
-                                                          actual_cell.y)
-                                elif card_type == 2:
-                                    just_a_plant = Plants(3,
-                                                          0,
-                                                          "sunflower",
-                                                          50,
-                                                          True,
-                                                          actual_cell.x,
-                                                          actual_cell.y)
-                                cell_active_list.append((actual_cell, just_a_plant))
-                                active = False
-                                card_type = 0
-                            else:
-                                continue
+                    print(len(setka_kol_vo_ravno_1.cells_list))
+                    for actual_cell in setka_kol_vo_ravno_1.cells_list:
+                        print("идет проверка")
+                    card_type = None
+                    print("проверка закончена")
         # если событие = нажатие клавиши
         elif event.type == pygame.KEYDOWN and active == True:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"

@@ -14,7 +14,6 @@ check = 0
 
 
 current_frame = 1 # переменная для отслееживания кадра (1 из 3 включительно)
-current_frame = 1 # переменная для отслееживания кадра (1 из 3 включительно)
 animation_speed = 250 # скорость анимации в милисекундах
 sun_fall_time = 0
 first_sun_appearance = 0
@@ -28,6 +27,7 @@ for temp in range(20):
 
 
 setka_kol_vo_ravno_1 = Squares(5, 7, 100, False)
+setka_kol_vo_ravno_1.create_square()
 
 batx = 0
 baty = 0

@@ -10,12 +10,13 @@ class Squares:
         self.cell_status = cell_status # 3 параметр "занятости" клетки
         self.cell_active_list = []
 
-
-
-
-    def draw_square(self, screen):
+    def create_square(self):
+        self.cell_active_list = []
         for strok in range(self.kol_vo_strok):
             for kolichestvo in range(self.kol_vo_stolbcov):
                 green_square = pygame.Rect((kolichestvo*self.cell_size)+100, (strok*self.cell_size)+100, self.cell_size, self.cell_size)
                 self.cells_list.append(green_square)
-                pygame.draw.rect(screen, (0, 255, 0), green_square, 4)
+
+    def draw_square(self, screen):
+        for cell in self.cells_list:
+            pygame.draw.rect(screen, (0, 255, 0), cell, 4)

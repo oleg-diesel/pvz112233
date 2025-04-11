@@ -114,11 +114,8 @@ while logic == False:  # создали бесконечный цикл
                     card_type = 2
                     active = True
                 elif card_type == 1 or card_type == 2: # 4 проверяет, выбрана ли карточка
-                    print(len(setka_kol_vo_ravno_1.cells_list))
                     for actual_cell in setka_kol_vo_ravno_1.cells_list:
-                        print("идет проверка")
-                    card_type = None
-                    print("проверка закончена")
+                        continue
         # если событие = нажатие клавиши
         elif event.type == pygame.KEYDOWN and active == True:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"

@@ -43,6 +43,11 @@ peashooter_card = pygame.image.load("pictures/card_peashooter.png")
 sunflower_card = pygame.image.load("pictures/card_sunflower.png")
 you_lose = pygame.image.load("pictures/img.png")
 you_lose = pygame.transform.scale(you_lose, (800, 600))
+
+# rect объекты для картинок
+little_sun_rect = pygame.Rect(sunx, suny, 70, 73)
+
+
 start = ""
 settings = ""
 authors = ""
@@ -113,7 +118,16 @@ while logic == False:  # создали бесконечный цикл
                     print("вы нажали на карточку подсонуха!")
                     card_type = 2
                     active = True
-                elif card_type == 1 or card_type == 2: # 4 проверяет, выбрана ли карточка
+                elif little_sun_rect.collidepoint(coordinaty_nazhatiya):
+                    sunx = -100
+                    print("вы нажали на солнце")
+                for cell_click in setka_kol_vo_ravno_1.cells_list:
+                    if cell_click[0].collidepoint(coordinaty_nazhatiya):
+                        print(cell_click)
+                    if cell_click[0].collidepoint(coordinaty_nazhatiya) and card_type == 1:
+                        newplant = Plants()
+
+                if card_type == 1 or card_type == 2: # 4 проверяет, выбрана ли карточка
                     for actual_cell in setka_kol_vo_ravno_1.cells_list:
                         continue
         # если событие = нажатие клавиши
@@ -129,12 +143,9 @@ while logic == False:  # создали бесконечный цикл
 
         pygame.draw.rect(screen, (125, 125, 125), button_start) # размещаем кнопку
 
-
         pygame.draw.rect(screen, (125, 125, 125), button_settings)
 
-
         pygame.draw.rect(screen, (125, 125, 125), button_authors)
-
 
         pygame.draw.rect(screen, (125, 125, 125), button_exit)
 
@@ -174,6 +185,8 @@ while logic == False:  # создали бесконечный цикл
             sun_fall_time += 20000 # считаем, во сколько будет следующее появление солнца
             sunx = random.randint(50, 700)
             suny = random.randint(50, 500)
+            little_sun_rect.x = sunx
+            little_sun_rect.y = suny
         screen.blit(little_sun, (sunx, suny))
         screen.blit(chose_tab, (0, 0))
         screen.blit(peashooter_card, (125, 6))

@@ -5,12 +5,13 @@ class Plants:
     peashooter_plant = pygame.transform.scale(peashooter_plant, (100, 100))
     sunflower_plant = pygame.image.load("pictures/SunFlower_0.png")
     sunflower_plant = pygame.transform.scale(sunflower_plant, (100, 100))
-    def __init__(self, hp, damage, name, price, sun_generate, plant_x, plant_y):
+    def __init__(self, hp, damage, name, price, sun_generate, shoots, plant_x, plant_y):
         self.hp = hp
         self.damage = damage
         self.name = name
         self.price = price
         self.sun_generate = sun_generate
+        self.shoots = shoots
         self.plant_x = plant_x
         self.plant_y = plant_y
 

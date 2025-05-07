@@ -11,6 +11,8 @@ screen = pygame.display.set_mode((width, height))  # создали окно 800
 
 cell_active_list = []
 check = 0
+sunflower_list = []
+peashooter_list = []
 
 
 current_frame = 1 # переменная для отслееживания кадра (1 из 3 включительно)
@@ -122,14 +124,17 @@ while logic == False:  # создали бесконечный цикл
                     sunx = -100
                     print("вы нажали на солнце")
                 for cell_click in setka_kol_vo_ravno_1.cells_list:
-                    if cell_click[0].collidepoint(coordinaty_nazhatiya):
-                        print(cell_click)
-                    if cell_click[0].collidepoint(coordinaty_nazhatiya) and card_type == 1:
-                        newplant = Plants()
-
-                if card_type == 1 or card_type == 2: # 4 проверяет, выбрана ли карточка
-                    for actual_cell in setka_kol_vo_ravno_1.cells_list:
-                        continue
+                    if cell_click[0].collidepoint(coordinaty_nazhatiya) and cell_click[1] == False:
+                        if card_type == 1:
+                            newplant = Plants(5, 0, 'peashooter', 100, False, True, cell_click[0].x, cell_click[0].y)
+                            peashooter_list.append(newplant)
+                            card_type = 0
+                            active = False
+                        elif card_type == 2:
+                            newplant = Plants(3, 0, 'sunflower', 50, True, False, cell_click[0].x, cell_click[0].y)
+                            sunflower_list.append(newplant)
+                            card_type = 0
+                            active = False
         # если событие = нажатие клавиши
         elif event.type == pygame.KEYDOWN and active == True:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"

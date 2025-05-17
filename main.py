@@ -205,7 +205,7 @@ while logic == False:  # создали бесконечный цикл
         setka_kol_vo_ravno_1.draw_square(screen)
         # Работа со временем (считаем паузу)
         active_time = pygame.time.get_ticks()  # текущее время с начала работы приложения
-        if active_time >= sun_fall_time: # если после нажатия кнопки играть прошло 20 секунд/появление солнца раз в 20 секунд
+        if active_time >= sun_fall_time: # если после нажатия кнопки играть прошло 8 секунд/появление солнца раз в 8ё секунд
             sun_fall_time += 8000 # считаем, во сколько будет следующее появление солнца
             sunx = random.randint(50, 700)
             suny = random.randint(50, 500)

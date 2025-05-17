@@ -15,7 +15,7 @@ class Squares:
         for strok in range(self.kol_vo_strok):
             for kolichestvo in range(self.kol_vo_stolbcov):
                 green_square = pygame.Rect((kolichestvo*self.cell_size)+100, (strok*self.cell_size)+100, self.cell_size, self.cell_size)
-                self.cells_list.append((green_square, False))
+                self.cells_list.append([green_square, False])
 
     def draw_square(self, screen):
         for cell in self.cells_list:

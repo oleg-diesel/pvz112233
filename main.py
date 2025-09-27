@@ -13,27 +13,27 @@ cell_active_list = []
 check = 0
 sunflower_list = []
 peashooter_list = []
-kolichestvo_solnc = "0" # переменная для подсчета количества солнц
+kolichestvo_solnc = "50" # переменная для подсчета количества солнц
 
 
 current_frame = 1 # переменная для отслееживания кадра (1 из 3 включительно)
 animation_speed = 250 # скорость анимации в милисекундах
 sun_fall_time = 0
 first_sun_appearance = 0
+sunflower_generation_time = 10000
 last_update_time = pygame.time.get_ticks()
 
 zombie_line = [500, 400, 300, 200, 100]
 zombie_list = []
 for temp in range(20):
-    newzombie = Zombie(10, 1,random.randint(1500, 15000), random.choice(zombie_line), 0.017)
+    newzombie = Zombie(10, 1,random.randint(1000, 4000), random.choice(zombie_line), 0.02)
     zombie_list.append(newzombie)
 
 
 setka_kol_vo_ravno_1 = Squares(5, 7, 100, False)
 setka_kol_vo_ravno_1.create_square()
 
-batx = 0
-baty = 0
+
 sunx = 801
 suny = 0
 
@@ -156,6 +156,11 @@ while logic == False:  # создали бесконечный цикл
         elif event.type == pygame.KEYDOWN and active == True:
             if event.key == pygame.K_z:  # Проверяем, нажата ли "Z"
                 active = False
+                if card_type == 1:
+                    card_type = 0
+                elif card_type == 2:
+                    card_type = 0
+
                 print("вы отменили выбор карточки!")
 
 
@@ -205,7 +210,7 @@ while logic == False:  # создали бесконечный цикл
         setka_kol_vo_ravno_1.draw_square(screen)
         # Работа со временем (считаем паузу)
         active_time = pygame.time.get_ticks()  # текущее время с начала работы приложения
-        if active_time >= sun_fall_time: # если после нажатия кнопки играть прошло 8 секунд/появление солнца раз в 8ё секунд
+        if active_time >= sun_fall_time: # если после нажатия кнопки играть прошло 8 секунд/появление солнца раз в 8 секунд
             sun_fall_time += 8000 # считаем, во сколько будет следующее появление солнца
             sunx = random.randint(50, 700)
             suny = random.randint(50, 500)
@@ -235,7 +240,11 @@ while logic == False:  # создали бесконечный цикл
             temp.draw(screen)
             if newzombie.x <= 50:
                 screen.blit(you_lose, (0, 0))
+        for sunflower_count in sunflower_list:
 
+
+
+            print("hi")
         # циклы для отрисовки растений списка
         for GOPOX in peashooter_list:
             GOPOX.draw(screen)

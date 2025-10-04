@@ -241,10 +241,7 @@ while logic == False:  # создали бесконечный цикл
             if newzombie.x <= 50:
                 screen.blit(you_lose, (0, 0))
         for sunflower_count in sunflower_list:
-
-
-
-            print("hi")
+            continue
         # циклы для отрисовки растений списка
         for GOPOX in peashooter_list:
             GOPOX.draw(screen)

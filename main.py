@@ -5,6 +5,12 @@ from class_squares import Squares
 from class_plants import Plants
 pygame.init()  # инициализация всех модулей Pygame
 
+pygame.mixer.init()
+
+pygame.mixer.music.set_volume(0.21)
+
+pygame.mixer.music.load("music/04. Grasswalk.mp3")
+
 width, height = 800, 600  # высота и ширина
 screen = pygame.display.set_mode((width, height))  # создали окно 800x600
 
@@ -61,6 +67,7 @@ screens = 1
 one_or_two_or_three = 1
 one_or_two_card = 0
 
+music_logic = 1
 
 pygame.font.init()  # инициализация модуля для работы со шрифтом
 my_font = pygame.font.SysFont('Comic Sans MS', 25)  # создаем шрифт для кнопок
@@ -204,6 +211,10 @@ while logic == False:  # создали бесконечный цикл
         screen.blit(text_exit, (button_exit.x + 34, button_exit.y + 10))
 
     if screens == 2:
+        if music_logic == 0:
+            music_logic = 1
+            pygame.mixer.music.play()
+
 
         text_solnca = my_little_font.render(kolichestvo_solnc, True, black)
 
@@ -241,7 +252,7 @@ while logic == False:  # создали бесконечный цикл
             if newzombie.x <= 50:
                 screen.blit(you_lose, (0, 0))
         for sunflower_count in sunflower_list:
-            continue
+            pass
         # циклы для отрисовки растений списка
         for GOPOX in peashooter_list:
             GOPOX.draw(screen)

@@ -1,5 +1,4 @@
 import pygame
-
 class Plants:
     peashooter_plant = pygame.image.load("pictures/Peashooter_0.png")
     peashooter_plant = pygame.transform.scale(peashooter_plant, (100, 100))
@@ -14,7 +13,7 @@ class Plants:
         self.shoots = shoots
         self.plant_x = plant_x
         self.plant_y = plant_y
-
+        self.active_Splant_time = pygame.time.get_ticks() + 15000
     def draw(self, screen):
         if self.name == "peashooter":
             screen.blit(Plants.peashooter_plant, (self.plant_x, self.plant_y))

@@ -3,6 +3,7 @@ import random
 from class_zombie import Zombie # импортировали класс зомби из скрипта
 from class_squares import Squares
 from class_plants import Plants
+from class_sun import Suns
 pygame.init()  # инициализация всех модулей Pygame
 
 pygame.mixer.init()
@@ -14,7 +15,7 @@ pygame.mixer.music.load("music/04. Grasswalk.mp3")
 width, height = 800, 600  # высота и ширина
 screen = pygame.display.set_mode((width, height))  # создали окно 800x600
 
-
+spisok_solnc = []
 cell_active_list = []
 check = 0
 sunflower_list = []
@@ -57,6 +58,7 @@ you_lose = pygame.transform.scale(you_lose, (800, 600))
 little_sun_rect = pygame.Rect(sunx, suny, 70, 73)
 
 
+
 start = ""
 settings = ""
 authors = ""
@@ -67,7 +69,7 @@ screens = 1
 one_or_two_or_three = 1
 one_or_two_card = 0
 
-music_logic = 1
+music_logic = 0
 
 pygame.font.init()  # инициализация модуля для работы со шрифтом
 my_font = pygame.font.SysFont('Comic Sans MS', 25)  # создаем шрифт для кнопок
@@ -132,10 +134,19 @@ while logic == False:  # создали бесконечный цикл
                     active = True
                 elif little_sun_rect.collidepoint(coordinaty_nazhatiya):
                     sunx = -100
+                    little_sun_rect.x = -100
                     kolichestvo_solnc = int(kolichestvo_solnc)
                     kolichestvo_solnc += 25
                     kolichestvo_solnc = str(kolichestvo_solnc)
                     print("вы нажали на солнце")
+                elif spisok_solnc != []:
+                    if sunfl_sun.Rrect.collidepoint(coordinaty_nazhatiya):
+                        sunfl_sun.x = -100
+                        sunfl_sun.Rrect.x = -100
+                        kolichestvo_solnc = int(kolichestvo_solnc)
+                        kolichestvo_solnc += 25
+                        kolichestvo_solnc = str(kolichestvo_solnc)
+                        print("вы нажали на солнце пднслнх!")
 
                 # проверяем каждую клетку из списка клеток
                 for cell_click in setka_kol_vo_ravno_1.cells_list:
@@ -251,12 +262,17 @@ while logic == False:  # создали бесконечный цикл
             temp.draw(screen)
             if newzombie.x <= 50:
                 screen.blit(you_lose, (0, 0))
-        for sunflower_count in sunflower_list:
-            pass
+        for sunflower_countdown in sunflower_list:
+            if active_time >= sunflower_countdown.active_Splant_time:
+                print('сгенерировать!!!')
+                sunfl_sun = Suns(sunflower_countdown.plant_x, sunflower_countdown.plant_y, "sunflower_sun")
+                spisok_solnc.append(sunfl_sun)
+                sunflower_countdown.active_Splant_time += 15000
         # циклы для отрисовки растений списка
         for GOPOX in peashooter_list:
             GOPOX.draw(screen)
         for CBETOK_COLNCE in sunflower_list:
             CBETOK_COLNCE.draw(screen)
-
+        for sunflower_sunn in spisok_solnc:
+            sunflower_sunn.draw(screen)
     pygame.display.update() # обновить экран (fps)
